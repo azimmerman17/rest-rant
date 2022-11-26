@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 
@@ -5,4 +6,6 @@ app.get('/', (req, res) => {
     res.send('hw')
 })
 
-app.listen(8080, console.log('listen-8080'))
+const PORT = process.env.PORT
+
+app.listen(PORT, console.log(`listen-${PORT}`))
