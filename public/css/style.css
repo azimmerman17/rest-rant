@@ -1,10 +1,23 @@
 h1 {
     text-align: center;
-    color: cornflowerblue;
+    color: whitesmoke;
 }
 
 img, .img-credit {
     width: 50%;
     display: block;
     margin: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    background-color: blue;
+    margin-bottom: 1em;
+}
+
+main, div {
+    margin: .5em;
 }

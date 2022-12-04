@@ -1,11 +1,11 @@
 const React = require('react')
-const Default = require('./default')
+const Default = require('./layouts/default')
 
 function Error404() {
     return (
         <Default>
             <main>
-                <h1>404: PAGE NOT FOUND</h1>
+                <h2>404: PAGE NOT FOUND</h2>
                 <p>Sorry, we cannot find this page!</p>
                 <img src='./images/cookies.jpg' alt='bowl of cookies'/>
                 <div className='img-credit'>

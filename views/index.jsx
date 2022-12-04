@@ -1,14 +1,14 @@
-const React =require('react')
-const Default = require('../default')
+const React = require('react')
+const Default = require('./layouts/default')
 
-function Index(data) {
-    let placesFormatted = data.places.map((place) => {
+function Index({ places }) {
+    let placesFormatted = places.map((place, i) => {
         return (
-            <div className='col-sm-6'>
+            <div className='col-sm-6' key={i}>
                 <h2 className='text-center'>{place.name}</h2>
-                <p className='text-center'>{place.cuisines}</p>
+                <p className='img-credit'>{place.cuisines}</p>
                 <img src={place.pic} alt={place.name}/>
-                <p className='text-center'>
+                <p className='img-credit'>
                     Located in {place.city}, {place.state}
                 </p>
             </div>
@@ -17,9 +17,8 @@ function Index(data) {
     return (
         <Default>
             <main>
-                <h1>Places to Rant or Rave about</h1>
                 <div className='row'>
-                {placesFormatted}
+                    {placesFormatted}
                 </div>
             </main>
         </Default>
