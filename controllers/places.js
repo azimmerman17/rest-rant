@@ -24,6 +24,17 @@ router.get('/:index', (req,res) => {
 
 //post new place
 router.post('/', (req, res) => {
+  if (!req.body.pic) {
+    // Default image if one is not provided
+    req.body.pic = '/public/images/restaurat-bar-photo.jpg'
+  }
+  if (!req.body.city) {
+    req.body.city = 'Anytown'
+  }
+  if (!req.body.state) {
+    req.body.state = 'USA'
+  }
+  
   Place.push(req.body)
   res.redirect('/places')
 })
