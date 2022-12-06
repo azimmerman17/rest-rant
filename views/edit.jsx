@@ -1,17 +1,19 @@
 const React = require('react')
 const Default = require('./layouts/default')
 
-function New_Form() {
+function Edit_Form({ place, index }) {
     return (
-        <Default>
+    <Default>
             <main>
-                <form method='POST' action='/places'>
+                <form method='POST' action={`/places/${index}?_method=PUT`}>
                     <div className='form-group'>
                         <label htmlFor='name'>Restaurant Name<sup>*</sup></label>
                         <input 
                             className='form-control' 
-                            id='name' name='name' 
+                            id='name' 
+                            name='name' 
                             type='text'
+                            defaultValue={place.name}
                             required/>
                     </div> 
                     <div className='form-group'>
@@ -20,7 +22,8 @@ function New_Form() {
                             className='form-control' 
                             id='pic' 
                             name='pic' 
-                            type='url'/>
+                            type='text'
+                            defaultValue={place.pic}/>
                     </div> 
                     <div className='form-group'>
                         <label htmlFor='cuisines'>Cuisines<sup>*</sup></label>
@@ -29,6 +32,7 @@ function New_Form() {
                             id='cuisines' 
                             name='cuisines' 
                             type='text'
+                            defaultValue={place.cuisines}
                             required/>
                     </div> 
                     <div className='form-group'>
@@ -37,7 +41,9 @@ function New_Form() {
                             className='form-control' 
                             id='city' 
                             name='city' 
-                            type='text'/>
+                            type='text'
+                            defaultValue={place.city}/>
+                            
                     </div> 
                     <div className='form-group'>
                         <label htmlFor='state'>State</label>
@@ -45,14 +51,17 @@ function New_Form() {
                             className='form-control' 
                             id='state' 
                             name='state' 
-                            type='text'/>
+                            type='text'
+                            defaultValue={place.state}/>
                     </div> 
-                    <input className='btn btn-primary' type='submit' value='Add Place'/>
+                    <input 
+                        className='btn btn-primary'
+                        type='submit' 
+                        value='Save Place'/>
                 </form>
             </main>
         </Default>
     )
-
 }
 
-module.exports = New_Form
+module.exports = Edit_Form
