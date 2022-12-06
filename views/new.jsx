@@ -7,7 +7,7 @@ function New_Form() {
             <main>
                 <form method='POST' action='/places'>
                     <div className='form-group'>
-                        <label htmlFor='name'>Restaurant Name</label>
+                        <label htmlFor='name'>Restaurant Name<sup>*</sup></label>
                         <input className='form-control' id='name' name='name' type='text'required/>
                     </div> 
                     <div className='form-group'>
@@ -15,7 +15,7 @@ function New_Form() {
                         <input className='form-control' id='pic' name='pic' type='url'/>
                     </div> 
                     <div className='form-group'>
-                        <label htmlFor='cuisines'>Cuisines</label>
+                        <label htmlFor='cuisines'>Cuisines<sup>*</sup></label>
                         <input className='form-control' id='cuisines' name='cuisines' type='text'required/>
                     </div> 
                     <div className='form-group'>

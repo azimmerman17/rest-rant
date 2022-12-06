@@ -9,9 +9,9 @@ function Home() {
                 <div className='img-credit'>
                     <small>Photo by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Patrick Tomasso</a> on <a href="https://unsplash.com/s/photos/restaurant?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></small>
                 </div>
-                <a href='./places'>
+                {/* <a href='./places'>
                     <button className='btn btn-primary'>Places Page</button>
-                </a>
+                </a> */}
             </main>
         </Default>
     )

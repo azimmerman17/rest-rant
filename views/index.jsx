@@ -2,10 +2,14 @@ const React = require('react')
 const Default = require('./layouts/default')
 
 function Index({ places }) {
-    let placesFormatted = places.map((place, i) => {
+    let placesFormatted = places.map((place, index) => {
         return (
-            <div className='col-sm-6' key={i}>
-                <h2 className='text-center'>{place.name}</h2>
+            <div className='col-sm-6'>
+                <h2 className='text-center'>
+                    <a href={`/places/${index}`}>
+                        {place.name}
+                    </a>
+                </h2>
                 <p className='img-credit'>{place.cuisines}</p>
                 <img src={place.pic} alt={place.name}/>
                 <p className='img-credit'>

@@ -9,9 +9,22 @@ function Default(html) {
                 <link rel='stylesheet' href='/css/style.css'/>
             </head>
             <body>
-            <header>
-            <a href='/'><h1>Rest-Rant</h1></a>
-        </header>
+            <nav>
+                    <ul>
+                        <li>
+                            <a href='/'>Home</a>    
+                        </li>                        
+                        <li>
+                            <a href='/places'>Restaurants</a>    
+                        </li>                        
+                        <li>
+                            <a href='/places/new'>Add Restaurant</a>    
+                        </li>    
+                    </ul>
+                </nav>
+                <header>
+                    <a href='/'><h1>Rest-Rant</h1></a>
+                </header>
                 {html.children}
             </body>
         </html>

@@ -3,21 +3,59 @@ h1 {
     color: whitesmoke;
 }
 
-img, .img-credit {
-    width: 50%;
-    display: block;
-    margin: auto;
-}
 
 a {
     text-decoration: none;
 }
 
-header {
-    background-color: blue;
+header h1{
+    color: cornflowerblue;
     margin-bottom: 1em;
 }
 
 main, div {
     margin: .5em;
 }
+
+sup {
+    color: red;
+}
+
+nav {
+    background-color: cornflowerblue;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 25px;
+}
+
+nav a {
+    color: #fff;
+    font-size: 1.5em;
+}
+
+/* body {
+    background-color: lightblue;
+    text-align: center; 
+  } */
+  
+  main {
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: white;
+  }
+
+  img, .img-credit {
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+
+  
