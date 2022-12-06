@@ -1,3 +1,8 @@
+html, body {
+    width: 100%!important; 
+    margin: 0;
+}
+
 h1 {
     text-align: center;
     color: whitesmoke;
@@ -13,10 +18,6 @@ header h1{
     margin-bottom: 1em;
 }
 
-main, div {
-    margin: .5em;
-}
-
 sup {
     color: red;
 }
@@ -24,6 +25,7 @@ sup {
 nav {
     background-color: cornflowerblue;
     padding: 10px;
+    width: 100%;
 }
 
 nav ul {
@@ -55,6 +57,11 @@ nav a {
   img, .img-credit {
     width: 50%;
     display: block;
+    margin: auto;
+}
+
+.fullSize {
+    width: 90%;
     margin: auto;
 }
 

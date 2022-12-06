@@ -1,16 +1,39 @@
 const React = require('react')
 const Default = require('./layouts/default')
 
-function Show({place}) {
+function Show({place, index}) {
     return (
         <Default>
             <main>
-                <h2 className='text-center'>{place.name}</h2>
-                <p className='img-credit'>{place.cuisines}</p>
-                <img src={place.pic} alt={place.name}/>
-                <p className='img-credit'>
-                    Located in {place.city}, {place.state}
-                </p>
+                <div className='col-lg-12 my-5'>
+                    <div className='row'>
+                        <div className='col'>
+                            <img className='fullSize' src={place.pic} alt={place.name}/>
+                        </div>
+                        <div className='col'>
+                            <h2 className='text-center fs-1 mb-4'>{place.name}</h2> 
+                            <div className='mb-5'>
+                                <h3 className='text-center'>Ratings</h3>
+                                <p className='text-center'>No Ratings</p>
+                            </div>
+                            <div className='mb-5'>
+                                <h3 className='text-center'>Description</h3>
+                                <p className='text-center'>Serving {place.cuisines} in {place.city}, {place.state}</p>
+                            </div>
+                            <div className='d-flex flex-row-reverse'>
+                                <form method='POST' action={`/places/${index}?_method=DELETE`}>
+                                    <input type='submit' className='btn btn-danger'value='Delete'/>
+                                </form>
+                                <a href={`/places/${index}/edit`} className='btn btn-warning mx-1'>Edit</a>
+                            </div>
+                        </div> 
+                    </div>
+                </div> 
+                <hr/> 
+                <div>
+                    <h3 className='mb-2'>Comments</h3>
+                    <p>No Comments</p>
+                </div>
             </main>
         </Default>
     )

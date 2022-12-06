@@ -1,10 +1,10 @@
 const router = require('express').Router()
-const Place = require('../models/places')
+const Places = require('../models/places')
 
 // show all the places
 router.get('/', (req, res) => {
     res.render('./index', {
-      places: Place,
+      places: Places,
     })
     
 })
@@ -19,11 +19,12 @@ router.get('/:index', (req,res) => {
   const { index } = req.params
   if (isNaN(index)) {
     res.render('error404')
-  } else if (!Place[index]) {
+  } else if (!Places[index]) {
     res.render('error404')
   } else {
     res.render('./show', {
-      place: Place[index]
+      place: Places[index],
+      index
     })
   }
   
@@ -42,8 +43,21 @@ router.post('/', (req, res) => {
     req.body.state = 'USA'
   }
   
-  Place.push(req.body)
+  Places.push(req.body)
   res.redirect('/places')
+})
+
+// Delete place
+router.delete('/:index', (req, res) => {
+  const { index } = req.params
+  if (isNaN(index)) {
+    res.render('error404')
+  } else if (!Places[index]) {
+    res.render('error404')
+  } else {
+    Places.splice(index, 1)
+    res.status(303).redirect('/places')
+  }
 })
 
 module.exports = router
