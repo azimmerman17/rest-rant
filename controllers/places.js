@@ -1,13 +1,17 @@
 const router = require('express').Router()
 const Places = require('../models/places')
-//onst index = require('../views')
 
 // show all the places
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  const places = await Places.find()
+  try {
     res.render('index', {
-      places: Places,
+      places
     })
-    
+  } catch (error) {
+    console.log('error', error)
+    res.render('error404')
+  }
 })
 
 // create new place
@@ -16,8 +20,8 @@ router.get('/new', (req, res) => {
 })
 
 //edit data for place by index
-router.get('/:index/edit', (req, res) => {
-  const { index } = req.params
+router.get('/:id/edit', (req, res) => {
+  const { id } = req.params
   const place = Places[index]
   if (isNaN(index)) {
     res.render('error404')
@@ -32,19 +36,17 @@ router.get('/:index/edit', (req, res) => {
 })
 
 //get place by index
-router.get('/:index', (req, res) => {
-  const { index } = req.params
-  if (isNaN(index)) {
-    res.render('error404')
-  } else if (!Places[index]) {
-    res.render('error404')
-  } else {
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  const place = await Places.findById(id)
+  try {
     res.render('show', {
-      place: Places[index],
-      index
+      place
     })
+  } catch (error) {
+    console.log('error', error)
+    res.render('error404')
   }
-  
 })
 
 //post new place
@@ -59,9 +61,13 @@ router.post('/', (req, res) => {
   if (!req.body.state) {
     req.body.state = 'USA'
   }
-  
-  Places.push(req.body)
-  res.redirect('places')
+  Places.create(req.body)
+  try {
+    res.redirect('/places')
+  } catch (error) {
+    console.log(error)
+    res.render('error404')
+  }
 })
 
 router.put('/:index', (req, res) => {

@@ -65,4 +65,6 @@ nav a {
     margin: auto;
 }
 
-  
+.hide {
+    visibility: hidden;
+}

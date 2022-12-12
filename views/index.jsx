@@ -2,11 +2,11 @@ const React = require('react')
 const Default = require('./layouts/default')
 
 function Index({ places }) {
-    let placesFormatted = places.map((place, index) => {
+    let placesFormatted = places.map((place) => {
         return (
             <div className='col-sm-6'>
                 <h2 className='text-center'>
-                    <a href={`/places/${index}`}>
+                    <a href={`/places/${place._id}`}>
                         {place.name}
                     </a>
                 </h2>

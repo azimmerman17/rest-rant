@@ -1,7 +1,7 @@
 const React = require('react')
 const Default = require('./layouts/default')
 
-function Show({place, index}) {
+function Show({place}) {
     return (
         <Default>
             <main>
@@ -10,8 +10,9 @@ function Show({place, index}) {
                         <div className='col'>
                             <img className='fullSize' src={place.pic} alt={place.name}/>
                         </div>
-                        <div className='col'>
-                            <h2 className='text-center fs-1 mb-4'>{place.name}</h2> 
+                        <div className='col mb-4'>
+                            <h2 className='text-center fs-1'>{place.name}</h2>
+                            <p className='text-center'><sup className='text-dark'>Founded: {place.founded}</sup></p>
                             <div className='mb-5'>
                                 <h3 className='text-center'>Ratings</h3>
                                 <p className='text-center'>No Ratings</p>
@@ -21,10 +22,10 @@ function Show({place, index}) {
                                 <p className='text-center'>Serving {place.cuisines} in {place.city}, {place.state}</p>
                             </div>
                             <div className='d-flex flex-row-reverse'>
-                                <form method='POST' action={`/places/${index}?_method=DELETE`}>
-                                    <input type='submit' className='btn btn-danger'value='Delete'/>
+                                <form method='POST' action={`/places/${place._id}?_method=DELETE`}>
+                                    <button className='btn btn-danger bi bi-trash' type='submit'></button>
                                 </form>
-                                <a href={`/places/${index}/edit`} className='btn btn-warning mx-1'>Edit</a>
+                                <a href={`/places/${place._id}/edit`} className='btn btn-warning mx-1 bi bi-pencil-square'></a>
                             </div>
                         </div> 
                     </div>

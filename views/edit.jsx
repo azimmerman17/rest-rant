@@ -3,20 +3,20 @@ const Default = require('./layouts/default')
 
 function Edit_Form({ place, index }) {
     return (
-    <Default>
-            <main>
-                <form method='POST' action={`/places/${index}?_method=PUT`}>
-                    <div className='form-group'>
+        <Default>
+        <main>
+            <form method='POST' action={`/places/${index}?_method=PUT`}>
+                <div className='row mb-2'>
+                    <div className='form-group col-sm-6'>
                         <label htmlFor='name'>Restaurant Name<sup>*</sup></label>
                         <input 
                             className='form-control' 
-                            id='name' 
-                            name='name' 
+                            id='name' name='name' 
                             type='text'
                             defaultValue={place.name}
                             required/>
                     </div> 
-                    <div className='form-group'>
+                    <div className='form-group col-sm-6'>
                         <label htmlFor='pic'>Restaurant Picture</label>
                         <input 
                             className='form-control' 
@@ -25,7 +25,36 @@ function Edit_Form({ place, index }) {
                             type='text'
                             defaultValue={place.pic}/>
                     </div> 
-                    <div className='form-group'>
+                </div>
+                <div className='row mb-2'>
+                    <div className='form-group col-sm-6'>
+                        <label htmlFor='city'>City</label>
+                        <input 
+                            className='form-control' 
+                            id='city' 
+                            name='city' 
+                            type='text'
+                            defaultValue={place.city}/>
+                    </div> 
+                    <div className='form-group col-sm-6'>
+                        <label htmlFor='state'>State</label>
+                        <input 
+                            className='form-control' 
+                            id='state' 
+                            name='state' 
+                            type='text'
+                            defaultValue={place.state}/>
+                    </div> 
+                </div>
+                <div className='row mb-2'>
+                <div className="form-group col-sm-6">
+                    <label for="founded">Founded Year</label>
+                    <input 
+                        className="form-control" 
+                        id="founded" 
+                        name="founded" />
+                    </div>
+                    <div className='form-group col-sm-6'>
                         <label htmlFor='cuisines'>Cuisines<sup>*</sup></label>
                         <input 
                             className='form-control' 
@@ -35,33 +64,11 @@ function Edit_Form({ place, index }) {
                             defaultValue={place.cuisines}
                             required/>
                     </div> 
-                    <div className='form-group'>
-                        <label htmlFor='city'>City</label>
-                        <input 
-                            className='form-control' 
-                            id='city' 
-                            name='city' 
-                            type='text'
-                            defaultValue={place.city}/>
-                            
-                    </div> 
-                    <div className='form-group'>
-                        <label htmlFor='state'>State</label>
-                        <input 
-                            className='form-control' 
-                            id='state' 
-                            name='state' 
-                            type='text'
-                            defaultValue={place.state}/>
-                    </div> 
-                    <input 
-                        className='btn btn-primary'
-                        type='submit' 
-                        value='Save Place'/>
-                </form>
-            </main>
+                </div>               
+                <input className='btn btn-primary' type='submit' value='Add Place'/>
+            </form>
+        </main>
         </Default>
     )
 }
-
 module.exports = Edit_Form
