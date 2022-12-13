@@ -44,7 +44,7 @@ function New_Form() {
                     </div>
                     <div className='row mb-2'>
                         <div className="form-group col-sm-6">
-                            <label htmlfor="founded">Founded Year</label>
+                            <label htmlFor="founded">Founded Year</label>
                             <input 
                                 className="form-control" 
                                 id="founded" 

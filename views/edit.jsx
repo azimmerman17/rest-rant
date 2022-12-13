@@ -1,11 +1,11 @@
 const React = require('react')
 const Default = require('./layouts/default')
 
-function Edit_Form({ place, index }) {
+function Edit_Form({ place }) {
     return (
         <Default>
         <main>
-            <form method='POST' action={`/places/${index}?_method=PUT`}>
+            <form method='POST' action={`/places/${place._id}?_method=PUT`}>
                 <div className='row mb-2'>
                     <div className='form-group col-sm-6'>
                         <label htmlFor='name'>Restaurant Name<sup>*</sup></label>
@@ -48,11 +48,12 @@ function Edit_Form({ place, index }) {
                 </div>
                 <div className='row mb-2'>
                 <div className="form-group col-sm-6">
-                    <label for="founded">Founded Year</label>
+                    <label htmlFor="founded">Founded Year</label>
                     <input 
                         className="form-control" 
                         id="founded" 
-                        name="founded" />
+                        name="founded"
+                        defaultValue={place.founded} />
                     </div>
                     <div className='form-group col-sm-6'>
                         <label htmlFor='cuisines'>Cuisines<sup>*</sup></label>
@@ -65,7 +66,7 @@ function Edit_Form({ place, index }) {
                             required/>
                     </div> 
                 </div>               
-                <input className='btn btn-primary' type='submit' value='Add Place'/>
+                <input className='btn btn-primary' type='submit' value='Edit Place'/>
             </form>
         </main>
         </Default>

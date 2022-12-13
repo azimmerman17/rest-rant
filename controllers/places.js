@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Places = require('../models/places')
+const seedData = require('../models/seedData')
 
 // show all the places
 router.get('/', async (req, res) => {
@@ -19,23 +20,21 @@ router.get('/new', (req, res) => {
   res.render('new')
 })
 
-//edit data for place by index
-router.get('/:id/edit', (req, res) => {
+//edit data for place by id
+router.get('/:id/edit', async (req, res) => {
   const { id } = req.params
-  const place = Places[index]
-  if (isNaN(index)) {
-    res.render('error404')
-  } else if (!Places[index]) {
-    res.render('error404')
-  } else {
+  const place = await Places.findById(id)
+  try {
     res.render('edit', {
-      place,
-      index
+      place
     })
+  } catch (error) {
+    console.log('error', error)
+    res.render('error404')
   }
 })
 
-//get place by index
+//get place by id
 router.get('/:id', async (req, res) => {
   const { id } = req.params
   const place = await Places.findById(id)
@@ -47,6 +46,18 @@ router.get('/:id', async (req, res) => {
     console.log('error', error)
     res.render('error404')
   }
+})
+
+// GET: Seed Data
+router.get('/data/seed', async (req, res) => {
+  await Places.insertMany(seedData)
+  res.redirect('/places')
+})
+
+// DELETE: 
+router.get('/reset/seed', async (req, res) => {
+  await Places.deleteMany()
+  res.redirect('/places/data/seed')
 })
 
 //post new place
@@ -70,38 +81,38 @@ router.post('/', (req, res) => {
   }
 })
 
-router.put('/:index', (req, res) => {
-  const { index } = req.params
-  if (isNaN(index)) {
-    res.render('error404')
-  } else if (!Places[index]) {
-    res.render('error404')
-  } else {
-    if (!req.body.pic) {
+router.put('/:id', async (req, res) => {
+  const { id } = req.params
+  const { pic, city, state } = req.body
+  try {
+    if (!pic) {
       // Default image if one is not provided
       req.body.pic = '/images/restaurat-bar-photo.jpg'
     }
-    if (!req.body.city) {
+    if (!city) {
       req.body.city = 'Anytown'
     }
-    if (!req.body.state) {
+    if (!state) {
       req.body.state = 'USA'
     }
-    Places[index] = req.body
-    res.redirect(`/places/${index}`)
+
+    await Places.findByIdAndUpdate(id, req.body)
+    res.redirect(`/places/${id}`)
+  } catch (error) {
+    console.log(error)
+    res.render('error404')
   }
 })
 
 // Delete place
-router.delete('/:index', (req, res) => {
-  const { index } = req.params
-  if (isNaN(index)) {
-    res.render('error404')
-  } else if (!Places[index]) {
-    res.render('error404')
-  } else {
-    Places.splice(index, 1)
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  await Places.findByIdAndDelete(id)
+  try {
     res.status(303).redirect('/places')
+  } catch (error) {
+    console.log(error)
+    res.render('error404')
   }
 })
 

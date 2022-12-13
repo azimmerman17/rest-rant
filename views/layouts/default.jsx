@@ -24,7 +24,7 @@ function Default(html) {
                     </ul>
                 </nav>
                 <header>
-                    <a href='/'><h1>Rest-Rant</h1></a>
+                    <h1>Places to Rant and Rave About</h1>
                 </header>
                 {html.children}
             </body>
