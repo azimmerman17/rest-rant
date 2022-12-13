@@ -6,7 +6,8 @@ const placeSchema = new mongoose.Schema({
     required: true
   },
   pic: {
-    type: String
+    type: String,
+    default: '/images/restaurat-bar-photo.jpg'
   }, 
   cuisines: {
     type: String,
@@ -21,8 +22,14 @@ const placeSchema = new mongoose.Schema({
     default: 'USA'
   },
   founded: {
-    type: Number
+    type: Number,
+    min: [1673, 'Surely not that old??'],
+    max: [new Date().getFullYear(), 'This date is in the future']
   }
 })
+
+placeSchema.methods.showEstablished = function() {
+  return `${this.name} has been serving ${this.city}, ${this.state} since ${this.founded}.` 
+}
 
 module.exports = mongoose.model('Places', placeSchema)

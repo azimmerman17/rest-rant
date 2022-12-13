@@ -12,14 +12,14 @@ function Show({place}) {
                         </div>
                         <div className='col mb-4'>
                             <h2 className='text-center fs-1'>{place.name}</h2>
-                            <p className='text-center'><sup className='text-dark'>Founded: {place.founded}</sup></p>
-                            <div className='mb-5'>
+                            <div className='mb-4'>
                                 <h3 className='text-center'>Ratings</h3>
                                 <p className='text-center'>No Ratings</p>
                             </div>
-                            <div className='mb-5'>
+                            <div className='mb-4'>
                                 <h3 className='text-center'>Description</h3>
-                                <p className='text-center'>Serving {place.cuisines} in {place.city}, {place.state}</p>
+                                <h5 className='text-center'>{place.showEstablished()}</h5>
+                                <p className='text-center'>Serving: {place.cuisines}</p>
                             </div>
                             <div className='d-flex flex-row-reverse'>
                                 <form method='POST' action={`/places/${place._id}?_method=DELETE`}>
