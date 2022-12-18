@@ -69,7 +69,7 @@ router.post('/', (req, res) => {
   if (!city) req.body.city = undefined
   if (!state) req.body.state = undefined
 
-  db.Place.create(req.body)
+  Comments.create(req.body)
   .then(() => {
       res.redirect('/places')
   })
@@ -80,6 +80,37 @@ router.post('/', (req, res) => {
 
   
 })
+
+router.post('/:id/comment', async (req, res) => {
+  console.log(req.body)
+  const { id } = req.params
+  const { author, stars, rant, content  } = req.body
+  if (!author) req.body.author = undefined
+  if (!content) req.body.content = undefined
+  if (rant === 'on') {
+    req.body.rant = true
+  } else {
+    req.body.rant = false
+  }
+  let place = await Places.findById(id)
+  .then(place => {
+      Comments.create(req.body)
+      .then(comment => {
+          place.comments.push(comment.id)
+          place.save()
+          .then(() => {
+              res.redirect(`/places/${id}`)
+          })
+      })
+      .catch(err => {
+          res.render('error404')
+      })
+  })
+  .catch(err => {
+      res.render('error404')
+  })
+})
+
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params

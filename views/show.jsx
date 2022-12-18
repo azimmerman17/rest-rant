@@ -7,14 +7,14 @@ function Show({place}) {
     )
     if (place.comments.length) {
         comments = place.comments.map(c => {
-            return (
-                <div className='border'>
-                    <h2 className='rant'>{c.rant ? 'Rant 😡' : 'Rave 😀'}</h2>
-                    <h4>{c.content}</h4>
-                    <h3>
+            return (              
+                <div className='border col-sm-4'>
+                    <h4 className='rant'>{c.rant ? 'Rant 😡' : 'Rave 😀'}</h4>
+                    <h5>{c.content}</h5>
+                    <h5>
                         <strong>- {c.author}</strong>
-                    </h3>
-                    <h4>Rating: {c.starts}</h4>
+                    </h5>
+                    <h5>Rating: {c.stars}</h5>
                 </div>
             )
         })
@@ -50,7 +50,59 @@ function Show({place}) {
                 <hr/> 
                 <div>
                     <h3 className='mb-2'>Comments</h3>
-                    {comments}
+                    <div className='row'>
+                        {comments}
+                    </div>
+                </div>
+                <hr/>
+                <div>
+                    <h3 className='mb-2'>Add comments</h3>
+                    <form method='POST' action={`/places/${place._id}/comment`}>
+                        <div className='row mb-2'>
+                            <div className='form-group'>
+                                <label htmlFor='content'>Comments</label>
+                                <input 
+                                    className='form-control' 
+                                    id='content' 
+                                    name='content' 
+                                    type='text'/>
+                            </div> 
+                        </div>
+                        <div className='row mb-2 align-baseline'>
+                            <div className='form-group col-sm-3'>
+                                <label htmlFor='author'>Author</label>
+                                <input 
+                                    className='form-control' 
+                                    id='author' 
+                                    name='author' 
+                                    type='text'/>
+                            </div> 
+                            <div className="form-group col-sm-3">
+                                <label htmlFor="stars">Star Rating</label>
+                                <input 
+                                    className="form-range" 
+                                    type='range'
+                                    id="stars" 
+                                    name="stars" 
+                                    min={0}
+                                    max={5}
+                                    step={0.5}
+                                    required
+                                    />
+                            </div>
+                            <div className="form-group col-sm-3">
+                                <label htmlFor="rant">Rant?</label>
+                                <input 
+                                    type="checkbox" 
+                                    name='rant'
+                                    id='rant'
+                                    />
+                            </div>
+                            <div className="form-group col-sm-3 text-end">
+                                <input className='btn btn-primary' type='submit' value='Submit'/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </main>
         </Default>
