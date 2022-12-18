@@ -1,20 +1,19 @@
 const router = require('express').Router()
+const db = require('../models/index')
 const Places = require('../models/places')
-const seedData = require('../models/seedData')
+const Comments = require('../models/comment')
 
-// show all the places
 router.get('/', async (req, res) => {
-  const places = await Places.find()
-  .then((places) => {
-    res.render('index', {
-      places
+    let places = await Places.find()
+    .then((places) => {
+      res.render('index', { places })
     })
-  })
-  .catch((error) => {
-    console.log('error', error)
-    res.render('error404')
-  })   
+    .catch(err => {
+      console.log(err) 
+      res.render('error404')
+    })
 })
+
 
 // create new place
 router.get('/new', (req, res) => {
@@ -40,16 +39,16 @@ router.get('/:id/edit', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params
   const place = await Places.findById(id)
-  .then((place) =>{
-    res.render('show', {
-      place
-    })
+  .populate('comments')
+  .then(place => {
+      res.render('show', { place })
   })
-  .catch((error) => {
-    console.log('error', error)
-    res.render('error404')
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
   })
 })
+
 
 // GET: Seed Data
 router.get('/data/seed', async (req, res) => {
@@ -57,7 +56,7 @@ router.get('/data/seed', async (req, res) => {
   res.redirect('/places')
 })
 
-// DELETE: 
+// DELETE: Reset to seed data
 router.get('/reset/seed', async (req, res) => {
   await Places.deleteMany()
   res.redirect('/places/data/seed')
@@ -70,14 +69,16 @@ router.post('/', (req, res) => {
   if (!city) req.body.city = undefined
   if (!state) req.body.state = undefined
 
-  Places.create(req.body)
+  db.Place.create(req.body)
   .then(() => {
-    res.redirect('/places')
+      res.redirect('/places')
   })
-  .catch((error) => {
-    console.log(error)
-    res.render('error404')
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
   })
+
+  
 })
 
 router.put('/:id', async (req, res) => {

@@ -2,6 +2,23 @@ const React = require('react')
 const Default = require('./layouts/default')
 
 function Show({place}) {
+    let comments = (
+        <p className='inactive'>No Comments</p>
+    )
+    if (place.comments.length) {
+        comments = place.comments.map(c => {
+            return (
+                <div className='border'>
+                    <h2 className='rant'>{c.rant ? 'Rant 😡' : 'Rave 😀'}</h2>
+                    <h4>{c.content}</h4>
+                    <h3>
+                        <strong>- {c.author}</strong>
+                    </h3>
+                    <h4>Rating: {c.starts}</h4>
+                </div>
+            )
+        })
+    }
     return (
         <Default>
             <main>
@@ -33,7 +50,7 @@ function Show({place}) {
                 <hr/> 
                 <div>
                     <h3 className='mb-2'>Comments</h3>
-                    <p>No Comments</p>
+                    {comments}
                 </div>
             </main>
         </Default>
