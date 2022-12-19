@@ -142,4 +142,16 @@ router.delete('/:id', async (req, res) => {
   })
 })
 
+router.delete('/:placeId/comment/:id', async (req, res) => {
+  const { placeId, id } = req.params
+  await Comments.findByIdAndDelete(id)
+  .then(() => {
+    res.status(303).redirect(`/places/${placeId}`)
+  })
+  .catch((error) => {
+    console.log(error)
+    res.render('error404')
+  })
+})
+
 module.exports = router

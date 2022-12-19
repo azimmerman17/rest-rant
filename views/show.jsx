@@ -12,10 +12,14 @@ function Show({place}) {
         let sumRatings = place.comments.reduce((total, c) => {
             return total + c.stars
         }, 0)
-        let averageRating = sumRatings / place.comments.length
+        let averageRating = Math.round(sumRatings / place.comments.length)
+        let stars = ''
+        for (let i = 0; i < averageRating; i++) {
+            stars += '⭐️'
+        }
         rating = (
             <h4 className='text-center'>
-                {Math.round(averageRating)} Stars
+                {stars} Stars
             </h4>
         )
         comments = place.comments.map(c => {
@@ -27,7 +31,11 @@ function Show({place}) {
                         <strong>- {c.author}</strong>
                     </h5>
                     <h5>Rating: {c.stars}</h5>
+                    <form method='POST' action={`/places/${place._id}/comment/${c._id}?_method=DELETE`}>
+                        <button className='btn btn-danger bi bi-trash' type='submit'></button>
+                    </form>
                 </div>
+
             )
         })
     }
