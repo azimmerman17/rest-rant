@@ -12,13 +12,13 @@ const Comment = require('./models/comment')
 const app = express()
 
 // middleware
+app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.json())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOveride('_method'))
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
 
 // controllers and routes
 app.use('/places', placeRoutes)
@@ -43,4 +43,4 @@ const PORT = process.env.PORT
 
 app.listen(PORT, console.log(`listen-${PORT}`))
 
-module.exports = app
+module.exports = app;
