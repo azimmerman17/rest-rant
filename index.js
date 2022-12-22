@@ -12,6 +12,7 @@ const Comment = require('./models/comment')
 const app = express()
 
 // middleware
+app.use(express.json())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOveride('_method'))

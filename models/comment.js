@@ -11,7 +11,7 @@ let commentSchema = new mongoose.Schema({
     },
     stars: {
         type: Number,
-        required: true
+        required: true,
     },
     content: {
         type: String,

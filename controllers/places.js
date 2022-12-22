@@ -8,8 +8,8 @@ router.get('/', async (req, res) => {
     .then((places) => {
       res.render('index', { places })
     })
-    .catch(err => {
-      console.log(err) 
+    .catch(error => {
+      console.log(error) 
       res.render('error404')
     })
 })
@@ -43,8 +43,8 @@ router.get('/:id', async (req, res) => {
   .then(place => {
       res.render('show', { place })
   })
-  .catch(err => {
-      console.log('err', err)
+  .catch(error => {
+      console.log('error', error)
       res.render('error404')
   })
 })
@@ -69,12 +69,12 @@ router.post('/', (req, res) => {
   if (!city) req.body.city = undefined
   if (!state) req.body.state = undefined
 
-  Comments.create(req.body)
+  Places.create(req.body)
   .then(() => {
       res.redirect('/places')
   })
-  .catch(err => {
-      console.log('err', err)
+  .catch(error => {
+      console.log('error', error)
       res.render('error404')
   })
 
@@ -82,7 +82,6 @@ router.post('/', (req, res) => {
 })
 
 router.post('/:id/comment', async (req, res) => {
-  console.log(req.body)
   const { id } = req.params
   const { author, stars, rant, content  } = req.body
   if (!author) req.body.author = undefined
@@ -124,7 +123,7 @@ router.put('/:id', async (req, res) => {
       res.redirect(`/places/${id}`)
     })
   .catch((error) => {
-    console.log(error)
+    console.log('error', error)
     res.render('error404')
   })
 })
@@ -137,7 +136,7 @@ router.delete('/:id', async (req, res) => {
     res.status(303).redirect('/places')
   })
   .catch((error) => {
-    console.log(error)
+    console.log('error', error)
     res.render('error404')
   })
 })
@@ -149,7 +148,7 @@ router.delete('/:placeId/comment/:id', async (req, res) => {
     res.status(303).redirect(`/places/${placeId}`)
   })
   .catch((error) => {
-    console.log(error)
+    console.log('error', error)
     res.render('error404')
   })
 })
